@@ -148,7 +148,6 @@ createServer = (server) => {
         headers: headers,
       };
       const resp = yield rp(options).catch(errors.RequestError, (reason) => {
-        console.log(reason);
         next(new ldap.UnavailableError(reason));
       });
       if (!resp) {
@@ -193,7 +192,6 @@ createServer = (server) => {
         headers: headers,
       };
       const resp = yield rp(options).catch(errors.RequestError, (reason) => {
-        console.log(reason);
         next(new ldap.UnavailableError(reason));
       });
       if (!resp) {
