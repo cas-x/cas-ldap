@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T16:59:16+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-30T11:16:57+08:00
+* @Last modified time: 2016-03-30T18:03:05+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -26,13 +26,14 @@ const search = (type) => {
       ip: req.connection.ldap.id,
       type: `${type} user search`,
       version: req.version || '-1',
-      dn: req.dn.toString(),
+      dn: dn,
       filter: req.filter.toString(),
       scope: req.scope,
     });
     co(function *() {
       const query = {};
-      const l = req.dn.toString().split('dc').length-1
+      const dn = req.dn.toString();
+      const l = dn.split('dc').length-1
       // maybe support equal only is enough
       req.filter.map((f) => {
         if (f.type === 'equal') {
@@ -42,10 +43,14 @@ const search = (type) => {
       });
 
       // dc=xxx, dc=user, dc=youzan, dc=com
-      if (l === 4) {
+      if (l === 4
+          && dn !== config.dn.staticdynamic
+          && dn !== config.dn.dynamic
+          && dn !== config.dn.static
+      ) {
         let id = 0;
         try {
-          id = req.dn.toString().split(',')[0].split('=')[1];
+          id = dn.split(',')[0].split('=')[1];
         } catch (e) {
           id = 0;
         }
