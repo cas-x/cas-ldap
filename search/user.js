@@ -32,7 +32,7 @@ const search = (type) => {
     });
     co(function *() {
       const query = {};
-      const dn = req.dn.toString();
+      const dn = req.dn.toString().replace(/\s+/g, '');
       const l = dn.split('dc').length-1
       // maybe support equal only is enough
       req.filter.map((f) => {
