@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T16:59:16+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-30T18:03:05+08:00
+* @Last modified time: 2016-03-30T18:03:51+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -43,7 +43,7 @@ const search = (type) => {
       });
 
       // dc=xxx, dc=user, dc=youzan, dc=com
-      if (l === 4
+      if (l >= 4
           && dn !== config.dn.staticdynamic
           && dn !== config.dn.dynamic
           && dn !== config.dn.static
