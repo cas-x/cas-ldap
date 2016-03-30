@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T16:59:16+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-30T11:06:57+08:00
+* @Last modified time: 2016-03-30T11:09:52+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -52,41 +52,38 @@ const search = (type) => {
         query['field'] = field;
         query['value'] = id;
       }
-      const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-      query['field'] = id;
-      const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-        const options = {
-          uri: `${config.cas.domain}${config.cas.api.getUser.endpoint}`,
-          method: config.cas.api.getUser.method,
-          qs: query,
-          json: true,
-          headers: headers,
-        };
-        const resp = yield rp(options).catch(errors.RequestError, (reason) => {
-          console.log(reason);
-        });
-        if (!resp) {
-          next(new ldap.UnavailableError());
-          return res.end();
-        }
-        if (resp.code !== 0) {
-          next(new ldap.NoSuchObjectError(resp.data.value));
-          return res.end();
-        }
-        const user = resp.data.value;
-        let basedn = `dc=${user.username},${config.dn.static}`;
-        if (type == 'static') {
-          basedn = `dc=${user.username},${config.dn.static}`;
-        } else if (type == 'dynamic') {
-          basedn = `dc=${user.username},${config.dn.dynamic}`;
-        } else if (type == 'staticdynamic'){
-          basedn = `dc=${user.username},${config.dn.staticdynamic}`;
-        }
-        res.send({
-          dn: basedn,
-          attributes: user
-        });
+      const options = {
+        uri: `${config.cas.domain}${config.cas.api.getUser.endpoint}`,
+        method: config.cas.api.getUser.method,
+        qs: query,
+        json: true,
+        headers: headers,
+      };
+      const resp = yield rp(options).catch(errors.RequestError, (reason) => {
+        console.log(reason);
+      });
+      if (!resp) {
+        next(new ldap.UnavailableError());
         return res.end();
+      }
+      if (resp.code !== 0) {
+        next(new ldap.NoSuchObjectError(resp.data.value));
+        return res.end();
+      }
+      const user = resp.data.value;
+      let basedn = `dc=${user.username},${config.dn.static}`;
+      if (type == 'static') {
+        basedn = `dc=${user.username},${config.dn.static}`;
+      } else if (type == 'dynamic') {
+        basedn = `dc=${user.username},${config.dn.dynamic}`;
+      } else if (type == 'staticdynamic'){
+        basedn = `dc=${user.username},${config.dn.staticdynamic}`;
+      }
+      res.send({
+        dn: basedn,
+        attributes: user
+      });
+      return res.end();
     })
     .catch((err) => {
       console.log(err);
