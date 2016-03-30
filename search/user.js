@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T16:59:16+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-30T11:09:52+08:00
+* @Last modified time: 2016-03-30T11:16:57+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -43,8 +43,9 @@ const search = (type) => {
 
       // dc=xxx, dc=user, dc=youzan, dc=com
       if (l === 4) {
+        let id = 0;
         try {
-          const id = req.dn.toString().split(',')[0].split('=')[1];
+          id = req.dn.toString().split(',')[0].split('=')[1];
         } catch (e) {
           id = 0;
         }
