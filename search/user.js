@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T16:59:16+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-30T18:03:51+08:00
+* @Last modified time: 2016-03-30T18:05:26+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -26,7 +26,7 @@ const search = (type) => {
       ip: req.connection.ldap.id,
       type: `${type} user search`,
       version: req.version || '-1',
-      dn: dn,
+      dn: req.dn.toString(),
       filter: req.filter.toString(),
       scope: req.scope,
     });
