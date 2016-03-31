@@ -34,7 +34,7 @@ NODE_ENV=dev node index.js
 
 Test
 ------------
-CAS-LDAP provides eight ways api as follow:
+CAS-LDAP provides many ways api as follow:
  1. admin password bind
  2. static password username bind
  3. static password id bind
@@ -42,7 +42,13 @@ CAS-LDAP provides eight ways api as follow:
  5. dynamic password id bind
  6. static dynamic password username bind
  7. static dynamic password id bind
- 8. search user
+ 8. static search user by filter
+ 9. static search user by username dn
+ 10. static dynamic search user by username dn
+ 11. dynamic search user by username dn
+ 12. static search user by id dn
+ 13. static dynamic search user by id dn
+ 14. dynamic search user by id dn
   
 For sure these core api is ok, please pass tests when change code.
 
