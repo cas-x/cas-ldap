@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T15:27:41+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-19T03:28:30+08:00
+* @Last modified time: 2016-03-31T23:18:58+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -90,7 +90,7 @@ describe('ldap static dynamic password id bind', function(){
   });
 });
 
-describe('ldap search user', function() {
+describe('ldap static search user by filter', function() {
   it('should return success', function(done) {
     var opts = {
       filter: `(email=${config.mock.email})`,
@@ -98,6 +98,138 @@ describe('ldap search user', function() {
       attributes: ['*']
     };
     client.search(config.dn.static, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap static search user by username dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.username},${config.dn.static}`, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap static dynamic search user by username dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.username},${config.dn.staticdynamic}`, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap dynamic search user by username dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.username},${config.dn.dynamic}`, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap static search user by id dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.id},${config.dn.static}`, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap static dynamic search user by id dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.id},${config.dn.staticdynamic}`, opts, function(err, res) {
+      expect(err).to.be.null;
+      res.on('searchEntry', function(entry) {
+        const user = entry.object;
+        expect(user.id).to.equal(config.mock.id);
+      });
+      res.on('error', function(err) {
+        expect(err).to.be.null;
+      });
+      res.on('end', function(result) {
+        done();
+      });
+    });
+  })
+})
+
+describe('ldap dynamic search user by id dn', function() {
+  it('should return success', function(done) {
+    var opts = {
+      scope: 'sub',
+      attributes: ['*']
+    };
+    client.search(`dc=${config.mock.id},${config.dn.dynamic}`, opts, function(err, res) {
       expect(err).to.be.null;
       res.on('searchEntry', function(entry) {
         const user = entry.object;
