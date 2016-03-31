@@ -12,6 +12,7 @@ Table of Contents
   * [Production](#production)
   * [Contributing](#contributing)
   * [License](#license)
+  * [Author](#author)
 
 
 Requirements
@@ -110,6 +111,12 @@ NODE_ENV=production node_modules/mocha/bin/mocha monitor.js
 Contributing
 ------------
 To contribute to CAS-LDAP, clone this repo locally and commit your code on a separate branch then send a pull request.
+
+
+Author
+------
+
+> GitHub [@detailyang](https://github.com/detailyang)     
 
 
 License
