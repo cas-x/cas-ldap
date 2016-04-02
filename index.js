@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T14:36:24+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-03-19T01:36:04+08:00
+* @Last modified time: 2016-04-02T23:40:54+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -52,7 +52,7 @@ const createLDAP = (type) => {
   }
 };
 
-createServer = (server) => {
+listenAndServe = (server) => {
   server.on('close', (err) => {
     console.log('ldap server closed');
   });
@@ -88,7 +88,7 @@ createServer = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {};
+    const body = {persistence: false};
     body[field] = id;
     body['password'] = req.credentials;
     body['dynamic'] = true;
@@ -133,7 +133,7 @@ createServer = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {};
+    const body = {persistence: false};
     body[field] = id;
     body['password'] = req.credentials;
     body['dynamic'] = true;
@@ -179,7 +179,7 @@ createServer = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {};
+    const body = {persistence: false};
     body[field] = id;
     body['password'] = req.credentials;
 
@@ -225,5 +225,5 @@ createServer = (server) => {
 
 const server = createLDAP('tls');
 const servers = createLDAP('notls');
-createServer(server);
-createServer(servers);
+listenAndServe(server);
+listenAndServe(servers);
