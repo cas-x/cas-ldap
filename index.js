@@ -3,7 +3,7 @@
 * @Date:   2016-03-13T14:36:24+08:00
 * @Email:  detailyang@gmail.com
 * @Last modified by:   detailyang
-* @Last modified time: 2016-04-02T23:40:54+08:00
+* @Last modified time: 2016-04-20T19:05:39+08:00
 * @License: The MIT License (MIT)
 */
 
@@ -88,7 +88,7 @@ listenAndServe = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {persistence: false};
+    const body = {persistence: 0};
     body[field] = id;
     body['password'] = req.credentials;
     body['dynamic'] = true;
@@ -133,7 +133,7 @@ listenAndServe = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {persistence: false};
+    const body = {persistence: 0};
     body[field] = id;
     body['password'] = req.credentials;
     body['dynamic'] = true;
@@ -179,7 +179,7 @@ listenAndServe = (server) => {
       id = 0;
     }
     const field = !isNaN(parseFloat(id)) && isFinite(id) ? 'id' : 'username';
-    const body = {persistence: false};
+    const body = {persistence: 0};
     body[field] = id;
     body['password'] = req.credentials;
 
