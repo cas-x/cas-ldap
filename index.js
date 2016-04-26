@@ -136,7 +136,6 @@ listenAndServe = (server) => {
     const body = {persistence: 0};
     body[field] = id;
     body['password'] = req.credentials;
-    body['dynamic'] = true;
     body['staticdynamic'] = true;
 
     co (function *() {
