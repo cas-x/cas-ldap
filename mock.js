@@ -27,45 +27,56 @@ app.post('/oauth/users/login', (req, res) => {
   const dynamic = req.body.dynamic;
   const staticdynamic = req.body.staticdynamic;
 
-  if (dynamic) {
-    if (staticdynamic) {
-        if ((config.mock.username === username || config.mock.id === id) &&
-          config.mock.password+config.mock.dynamic === password) {
-          return res.send({
-            code: 0,
-            msg: 'ok',
-            data: {
-              value: {
-                username: username,
-                id: config.mock.id,
-              }
-            }
-          });
+  if (staticdynamic) {
+    if ((config.mock.username === username || config.mock.id === id) &&
+      config.mock.password+config.mock.dynamic === password) {
+      return res.send({
+        code: 0,
+        msg: 'ok',
+        data: {
+          value: {
+            username: username,
+            id: config.mock.id,
+          }
         }
+      });
     } else {
-      if (config.mock.username === username && config.mock.dynamic == password) {
-        return res.send({
-          code: 0,
-          msg: 'ok',
-          data: {
-            value: {
-              username: username,
-              id: config.mock.id,
-            }
+      return res.send({
+        code: 40000,
+        msg: 'param is not right',
+        data: {
+          value: {
+            username: username,
+            id: config.mock.id,
           }
-        });
-      } else if (config.mock.id === id && config.mock.dynamic == password) {
-        return res.send({
-          code: 0,
-          msg: 'ok',
-          data: {
-            value: {
-              username: username,
-              id: config.mock.id,
-            }
+        }
+      });
+    }
+  }
+
+  if (dynamic) {
+    if (config.mock.username === username && config.mock.dynamic == password) {
+      return res.send({
+        code: 0,
+        msg: 'ok',
+        data: {
+          value: {
+            username: username,
+            id: config.mock.id,
           }
-        });
-      }
+        }
+      });
+    } else if (config.mock.id === id && config.mock.dynamic == password) {
+      return res.send({
+        code: 0,
+        msg: 'ok',
+        data: {
+          value: {
+            username: username,
+            id: config.mock.id,
+          }
+        }
+      });
     }
   } else {
     if (config.mock.username === username && config.mock.password == password) {
