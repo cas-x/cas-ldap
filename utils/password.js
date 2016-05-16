@@ -8,7 +8,7 @@
 
 const base32 = require('thirty-two');
 const notp = require('notp');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 function check(plaintext, cipher) {
