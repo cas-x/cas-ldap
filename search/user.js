@@ -42,7 +42,6 @@ const search = (type) => {
         }
       });
 
-      // dc=xxx, dc=user, dc=youzan, dc=com
       if (l >= 4
           && dn !== config.dn.staticdynamic
           && dn !== config.dn.dynamic
